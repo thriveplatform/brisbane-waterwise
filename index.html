@@ -2,16 +2,33 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Talking Points in the Year Leading up to the Olympics</title>
+		<title>Talking Points in the Year Leading up to the Paris Olympics</title>
 		<link rel="stylesheet" type="text/css" href="style.css" >
 		<!--<script type="text/javascript" src="d3.v4.js"></script>-->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&display=swap" rel="stylesheet">
+	<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 	</head>
 
 	<body>
-		<script type="module" src="stacked_area_articles.js"></script>
+		<script type="module">
+			import { redrawCharts } from './stacked_area_articles.js';
+
+			var chart_width = window.innerWidth/4+40;//450;
+			var chart_height = window.innerHeight/2
+
+			function resizeChart(){
+				chart_width = window.innerWidth/4+40;//450;
+				chart_height = window.innerHeight/2;
+				redrawCharts(chart_width, chart_height);
+			}
+
+			resizeChart();
+			window.onresize = resizeChart;
+			
+		</script>
+
   	</body>
 
 </html>

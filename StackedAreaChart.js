@@ -2,8 +2,8 @@ import { BaseChart } from './BaseChart.js';
 
 export class StackedAreaChart extends BaseChart {
 
-    constructor(data_object, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
-        super(data_object, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType);
+    constructor(data_object, annotations, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
+        super(data_object, annotations, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType);
 
     }
 
@@ -59,13 +59,14 @@ export class StackedAreaChart extends BaseChart {
         //Adding the chart title
         this.g.append("text")
             .attr("x", this.chart_width/2+30)
-            .attr("y", -15)
+            .attr("y", -10)
             .attr("font-size", 20)
             .attr("text-anchor", "middle")
             .attr("font-family", "Bebas Neue")
             .text(this.title);
-
+        
         let i = 1;
+        
         const animate = () => {
 
             let trans_dur = 0;
@@ -86,23 +87,87 @@ export class StackedAreaChart extends BaseChart {
 
                                         let month_text = this.data_object[i-1]['month'];
                                         let data_val = this.stackedData[0][i-1][1];
-                
+                                        
+                                        let label_hor_offset = 0;
+                                        if (month_text == "Jul-24"){
+                                            label_hor_offset = 15;
+                                        }
+                                        else if (month_text == "Aug-23"){
+                                            label_hor_offset = 45;
+
+                                        }
+                                        else{
+                                            label_hor_offset = 39;
+                                        }
+
+                                        let label_vertical_offset = 15;
+                                        if (data_val == 0){
+                                            label_vertical_offset = -5;
+                                        }
+
                                         this.g.append("text")
-                                            //.attr("class", "dynamic-label")
-                                            .attr("x", this.x(month_text)+40)
-                                            .attr("y", this.y(data_val)+5)
-                                            .attr("font-size", 14)
+                                            .attr("x", this.x(month_text)+label_hor_offset)
+                                            .attr("y", this.y(data_val)+label_vertical_offset)
+                                            .attr("font-size", 10)
                                             .attr("text-anchor", "middle")
                                             .attr("font-family", "Bebas Neue")
                                             .text(data_val + "%");
                                         
+                                        this.annotations.forEach(annotation => {
+                                            
+                                            if (annotation.month == month_text){
 
+                                                annotation.x = this.x(month_text)+25;
+                                                
+                                                if (data_val == 0){
+                                                    annotation.y = this.y(data_val);
+                                                }else{
+                                                    annotation.y = this.y(data_val-10);
+                                                }
+
+                                                annotation.dx = -1;
+                                                annotation.dy = 0;
+
+                                                const makeAnnotations = d3.annotation()
+                                                                            .annotations([annotation]);
+
+                                                this.g.append("g")
+                                                        .call(makeAnnotations)
+                                                        .selectAll(".annotation")
+                                                        .data([annotation]) //bind full annotation objects
+                                                        .style("cursor", "pointer")
+                                                        .on("click", function(event, d) {
+                                                            if (d.url) {
+                                                            window.open(d.url, "_blank");
+                                                            }
+                                                        });
+                                                
+                                                d3.selectAll(".annotation-note-title")
+                                                    .style("font-family", "Glacial Indifference")
+                                                    .style("fill", "black")
+                                                    .style("font-style", "italic")
+                                                    .style("font-size", "15");
+                                                
+                                                d3.selectAll(".annotation-note-label")
+                                                    .style("font-family", "Glacial Indifference")
+                                                    .style("fill", "black")
+                                                    .style("font-size", "10");
+
+                                                // Horizontal line under the note (title/label)
+                                                d3.selectAll(".annotation-note path")
+                                                    .style("stroke", "black")
+                                                    .style("stroke-width", "1px");
+                                                
+                                                d3.selectAll(".annotation-connector path")
+                                                    .style("stroke", "black")      // Change the line color
+                                                    .style("stroke-width", "1px"); // Optional: make the line thicker
+                                            }
+                                        });
                                     }
                                     animate();
                                     i++;
                                     
-                                }); // call animate again after transition completes
-            
+                                }); // call animate again after transition completes            
         }
 
         animate();  
