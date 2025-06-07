@@ -135,7 +135,7 @@ export function redrawCharts(chart_width, chart_height){
 
   const color_arr2 = ["#549ec4", "#8ce3b0"];// skyblue: #549ec4, lightgreen: #8ce3b0
   const key_arr2 = ["Environmental - Aquatic", "Environmental - Non-Aquatic"];
-  let pos_x2 = chart_width+210;
+  let pos_x2 = chart_width+190;
   let pos_y2 = 0;
   let char_instance2 = get_chart_instance("A", data2, annotations2, key_arr2, g, margin, chart_width, chart_height, color_arr2, pos_x2, pos_y2, "Aquatic Focus in Environmental Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveMonotoneX);
 }
