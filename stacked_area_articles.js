@@ -58,7 +58,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
-          wrap: 120,
+          wrap: 140,
           month: "Jul-24",
           url: "https://www.rte.ie/news/world/2024/0717/1460305-paris-mayor-seine/"
       },
@@ -72,7 +72,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
-          wrap: 120,
+          wrap: 140,
           month: "Dec-23",
           url: "https://apnews.com/article/olympics-paris-surfing-tahiti-coral-032662b649a34e3d12bf62c87e2ca727"
       }

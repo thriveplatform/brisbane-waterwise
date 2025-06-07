@@ -141,7 +141,7 @@ export class StackedAreaChart extends BaseChart {
                                                     annotation.dx = 0
                                                 }
 
-                                                annotation.dy = 0;
+                                                annotation.dy = -annotation.y+165;
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
