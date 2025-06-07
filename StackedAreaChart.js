@@ -131,7 +131,7 @@ export class StackedAreaChart extends BaseChart {
                                                 if (data_val == 0){
                                                     annotation.y = this.y(data_val);
                                                 }else{
-                                                    annotation.y = this.y(data_val-10);
+                                                    annotation.y = this.y(data_val-30);
                                                 }
 
                                                 if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
@@ -140,8 +140,8 @@ export class StackedAreaChart extends BaseChart {
                                                 else{
                                                     annotation.dx = 0
                                                 }
-
-                                                annotation.dy = -annotation.y+121*this.chart_height/347.5;
+                                                
+                                                annotation.dy = this.y(100) - annotation.y + 185;
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
@@ -156,7 +156,18 @@ export class StackedAreaChart extends BaseChart {
                                                             }
                                                         });
                                                 
-                                                let title_size = (this.chart_width/424)*15;
+
+                                                let title_size = 15;
+                                                let title_size1 = (this.chart_width/424)*15;
+                                                let title_size2 = (this.chart_height/347.5)*15;
+                                                
+                                                if (title_size1 < title_size2){
+                                                    title_size = title_size1;
+                                                }
+                                                else{
+                                                    title_size = title_size2;
+                                                }
+
                                                 d3.selectAll(".annotation-note-title")
                                                     .style("font-family", "Glacial Indifference")
                                                     .style("fill", "black")
@@ -189,7 +200,6 @@ export class StackedAreaChart extends BaseChart {
     add_legend(){
         // Position it beside the chart
         const legend = this.g.append("g")
-                            //.attr("class", "legend")
                             .attr("transform", `translate(${this.chart_width + 40}, 30)`);
 
         //Legend item height and spacing
