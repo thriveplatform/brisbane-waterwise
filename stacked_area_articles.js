@@ -18,7 +18,7 @@ export function redrawCharts(chart_width, chart_height){
 
   d3.select("body").selectAll("svg").remove();
 
-  var margin = {left:25,right:25,top:25,bottom:0};
+  var margin = {left:50,right:25,top:50,bottom:50};
 
   var svg = d3.select("body")
                 .append("svg")
@@ -31,18 +31,18 @@ export function redrawCharts(chart_width, chart_height){
   //First chart
   // Number of articles: environment related and total
   const data1 = [
-    {month: 'Aug-23', "Articles - Environmental": 3, "Articles - Other": 4},
-    {month: 'Sep-23', "Articles - Environmental": 2, "Articles - Other": 14},
-    {month: 'Oct-23', "Articles - Environmental": 1, "Articles - Other": 4},
-    {month: 'Nov-23', "Articles - Environmental": 1, "Articles - Other": 4},
-    {month: 'Dec-23', "Articles - Environmental": 4, "Articles - Other": 6},
-    {month: 'Jan-24', "Articles - Environmental": 1, "Articles - Other": 11},
-    {month: 'Feb-24', "Articles - Environmental": 0, "Articles - Other": 14},
-    {month: 'Mar-24', "Articles - Environmental": 0, "Articles - Other": 18},
-    {month: 'Apr-24', "Articles - Environmental": 8, "Articles - Other": 38},
-    {month: 'May-24', "Articles - Environmental": 0, "Articles - Other": 14},
-    {month: 'Jun-24', "Articles - Environmental": 10, "Articles - Other": 34},
-    {month: 'Jul-24', "Articles - Environmental": 22, "Articles - Other": 48}
+    {month: 'Aug-23', "Environmental": 3, "Others": 4},
+    {month: 'Sep-23', "Environmental": 2, "Others": 14},
+    {month: 'Oct-23', "Environmental": 1, "Others": 4},
+    {month: 'Nov-23', "Environmental": 1, "Others": 4},
+    {month: 'Dec-23', "Environmental": 4, "Others": 6},
+    {month: 'Jan-24', "Environmental": 1, "Others": 11},
+    {month: 'Feb-24', "Environmental": 0, "Others": 14},
+    {month: 'Mar-24', "Environmental": 0, "Others": 18},
+    {month: 'Apr-24', "Environmental": 8, "Others": 38},
+    {month: 'May-24', "Environmental": 0, "Others": 14},
+    {month: 'Jun-24', "Environmental": 10, "Others": 34},
+    {month: 'Jul-24', "Environmental": 22, "Others": 48}
   ];
 
   // Features of the annotation
@@ -79,7 +79,7 @@ export function redrawCharts(chart_width, chart_height){
   ];
 
   const color_arr1 = ["green", "gray"];
-  const key_arr1 = ["Articles - Environmental", "Articles - Other"];
+  const key_arr1 = ["Environmental", "Others"];
   let pos_x1 = 0;
   let pos_y1 = 0;
   let char_instance1 = get_chart_instance("A", data1, annotations1, key_arr1, g, margin, chart_width, chart_height, color_arr1, pos_x1, pos_y1, "Environmental Focus in Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveLinear);
@@ -87,18 +87,18 @@ export function redrawCharts(chart_width, chart_height){
   //Second chart
   // Number of articles: environment related and total
   const data2 = [
-    {month: 'Aug-23', "Environmental Articles - Aquatic": 3, "Environmental Articles - Non-Aquatic": 3},
-    {month: 'Sep-23', "Environmental Articles - Aquatic": 0, "Environmental Articles - Non-Aquatic": 2},
-    {month: 'Oct-23', "Environmental Articles - Aquatic": 1, "Environmental Articles - Non-Aquatic": 1},
-    {month: 'Nov-23', "Environmental Articles - Aquatic": 1, "Environmental Articles - Non-Aquatic": 1},
-    {month: 'Dec-23', "Environmental Articles - Aquatic": 3, "Environmental Articles - Non-Aquatic": 4},
-    {month: 'Jan-24', "Environmental Articles - Aquatic": 1, "Environmental Articles - Non-Aquatic": 1},
-    {month: 'Feb-24', "Environmental Articles - Aquatic": 0, "Environmental Articles - Non-Aquatic": 0},
-    {month: 'Mar-24', "Environmental Articles - Aquatic": 0, "Environmental Articles - Non-Aquatic": 0},
-    {month: 'Apr-24', "Environmental Articles - Aquatic": 6, "Environmental Articles - Non-Aquatic": 8},
-    {month: 'May-24', "Environmental Articles - Aquatic": 0, "Environmental Articles - Non-Aquatic": 0},
-    {month: 'Jun-24', "Environmental Articles - Aquatic": 6, "Environmental Articles - Non-Aquatic": 10},
-    {month: 'Jul-24', "Environmental Articles - Aquatic": 16, "Environmental Articles - Non-Aquatic": 22}
+    {month: 'Aug-23', "Environmental - Aquatic": 3, "Environmental - Non-Aquatic": 3},
+    {month: 'Sep-23', "Environmental - Aquatic": 0, "Environmental - Non-Aquatic": 2},
+    {month: 'Oct-23', "Environmental - Aquatic": 1, "Environmental - Non-Aquatic": 1},
+    {month: 'Nov-23', "Environmental - Aquatic": 1, "Environmental - Non-Aquatic": 1},
+    {month: 'Dec-23', "Environmental - Aquatic": 3, "Environmental - Non-Aquatic": 4},
+    {month: 'Jan-24', "Environmental - Aquatic": 1, "Environmental - Non-Aquatic": 1},
+    {month: 'Feb-24', "Environmental - Aquatic": 0, "Environmental - Non-Aquatic": 0},
+    {month: 'Mar-24', "Environmental - Aquatic": 0, "Environmental - Non-Aquatic": 0},
+    {month: 'Apr-24', "Environmental - Aquatic": 6, "Environmental - Non-Aquatic": 8},
+    {month: 'May-24', "Environmental - Aquatic": 0, "Environmental - Non-Aquatic": 0},
+    {month: 'Jun-24', "Environmental - Aquatic": 6, "Environmental - Non-Aquatic": 10},
+    {month: 'Jul-24', "Environmental - Aquatic": 16, "Environmental - Non-Aquatic": 22}
   ];
 
   // Features of the annotation
@@ -134,7 +134,7 @@ export function redrawCharts(chart_width, chart_height){
   ];
 
   const color_arr2 = ["#549ec4", "#8ce3b0"];// skyblue: #549ec4, lightgreen: #8ce3b0
-  const key_arr2 = ["Environmental Articles - Aquatic", "Environmental Articles - Non-Aquatic"];
+  const key_arr2 = ["Environmental - Aquatic", "Environmental - Non-Aquatic"];
   let pos_x2 = chart_width+210;
   let pos_y2 = 0;
   let char_instance2 = get_chart_instance("A", data2, annotations2, key_arr2, g, margin, chart_width, chart_height, color_arr2, pos_x2, pos_y2, "Aquatic Focus in Environmental Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveMonotoneX);
