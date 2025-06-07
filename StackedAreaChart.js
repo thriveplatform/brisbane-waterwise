@@ -141,7 +141,7 @@ export class StackedAreaChart extends BaseChart {
                                                     annotation.dx = 0
                                                 }
 
-                                                annotation.dy = -annotation.y+165;
+                                                annotation.dy = -annotation.y+121*this.chart_height/347.5;
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
@@ -190,10 +190,10 @@ export class StackedAreaChart extends BaseChart {
         // Position it beside the chart
         const legend = this.g.append("g")
                             //.attr("class", "legend")
-                            .attr("transform", `translate(${this.chart_width + 40}, 20)`);
+                            .attr("transform", `translate(${this.chart_width + 40}, 30)`);
 
         //Legend item height and spacing
-        const legendSpacing = - 20;
+        const legendSpacing = - 30;
 
         this.key_arr.forEach((d, i) => {
 
