@@ -155,6 +155,9 @@ export class StackedAreaChart extends BaseChart {
                                             label_vertical_offset = -5;
                                         }
                                         //Special override to avoid overlapping issue.
+                                        if (i == 1 && data_val == 75){
+                                            label_vertical_offset = 100;
+                                        }
                                         if (i == 9 && data_val == 75){
                                             label_vertical_offset = 100;
                                         }
