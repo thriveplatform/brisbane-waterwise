@@ -26,7 +26,15 @@ export class StackedAreaChart extends BaseChart {
                             .attr("d", d => area(d.slice(0, 1))); // Start with only first point
         
         //Adding the x-axis and its label
-        let x_ticker_size = (this.chart_width/347.5) * 12;
+        let x_ticker_size = 12;
+        let x_ticker_size1 = (this.chart_width/424) * 12;
+        let x_ticker_size2 = (this.chart_height/347.5) * 12;
+        if (x_ticker_size1 < x_ticker_size2){
+            x_ticker_size = x_ticker_size1;
+        }
+        else{
+            x_ticker_size = x_ticker_size2;
+        }
         this.xAxisGroup = this.g.append("g")
                             .attr("transform", `translate(30,${this.chart_height})`)
                             .call(d3.axisBottom(this.x));
@@ -35,7 +43,16 @@ export class StackedAreaChart extends BaseChart {
                             .attr("font-family", "Glacial Indifference")
                             .attr("transform", "translate(0,10) rotate(-45)");
 
-        let x_axis_label_size = (this.chart_width/424)*15;
+
+        let x_axis_label_size = 18;
+        let x_axis_label_size1 = (this.chart_width/424) * 18;
+        let x_axis_label_size2 = (this.chart_height/347.5) * 18;
+        if (x_axis_label_size1 < x_axis_label_size2){
+            x_axis_label_size = x_axis_label_size1;
+        }
+        else{
+            x_axis_label_size = x_axis_label_size2;
+        }
         this.g.append("text")
                 .attr("x", this.chart_width/2)
                 .attr("y", this.chart_height+55)
@@ -45,7 +62,15 @@ export class StackedAreaChart extends BaseChart {
                 .text("Month");
         
         //Adding the y-axis and its label.
-        let y_ticker_size = (this.chart_height/424) * 12;
+        let y_ticker_size = 12;
+        let y_ticker_size1 = (this.chart_width/424) * 12;
+        let y_ticker_size2 = (this.chart_height/347.5) * 12;
+        if (y_ticker_size1 < y_ticker_size2){
+            y_ticker_size = y_ticker_size1;
+        }
+        else{
+            y_ticker_size = y_ticker_size2;
+        }
         this.yAxisGroup = this.g.append("g")
                 .attr("transform", `translate(30,0)`)
                 .call(d3.axisLeft(this.y));
@@ -53,7 +78,16 @@ export class StackedAreaChart extends BaseChart {
                 .attr("font-size", y_ticker_size)
                 .attr("font-family", "Glacial Indifference");
         
-        let y_axis_label_size = (this.chart_height/347.5)*15;
+        
+        let y_axis_label_size = 18;
+        let y_axis_label_size1 = (this.chart_width/424) * 18;
+        let y_axis_label_size2 = (this.chart_height/347.5) * 18;
+        if (y_axis_label_size1 < y_axis_label_size2){
+            y_axis_label_size = y_axis_label_size1;
+        }
+        else{
+            y_axis_label_size = y_axis_label_size2;
+        }
         this.g.append("text")
             .attr("x", -this.chart_height/2)
             .attr("y", 0)
@@ -64,7 +98,15 @@ export class StackedAreaChart extends BaseChart {
             .text("Percentage (%) of Articles");
         
         //Adding the chart title
-        let chart_title_size = (this.chart_width/424)*20;
+        let chart_title_size = 20;
+        let chart_title_size1 = (this.chart_width/424) * 20;
+        let chart_title_size2 = (this.chart_height/347.5) * 20;
+        if (chart_title_size1 < chart_title_size2){
+            chart_title_size = chart_title_size1;
+        }
+        else{
+            chart_title_size = chart_title_size2;
+        }
         this.g.append("text")
             .attr("x", this.chart_width/2+30)
             .attr("y", -10)
@@ -112,13 +154,29 @@ export class StackedAreaChart extends BaseChart {
                                         if (data_val == 0){
                                             label_vertical_offset = -5;
                                         }
-
-                                        let label_font_size = (this.chart_width/424)*12;
+                                        //Special override to avoid overlapping issue.
+                                        if (i == 9 && data_val == 75){
+                                            label_vertical_offset = 100;
+                                        }
+                                        if (i == 12 && data_val == 73){
+                                            label_vertical_offset = 40;
+                                        }
+                                        
+                                        let label_font_size = 18;
+                                        let label_font_size1 = (this.chart_width/424) * 18;
+                                        let label_font_size2 = (this.chart_height/347.5) * 18;
+                                        if (label_font_size1 < label_font_size2){
+                                            label_font_size = label_font_size1;
+                                        }
+                                        else{
+                                            label_font_size = label_font_size2;
+                                        }
                                         this.g.append("text")
                                             .attr("x", this.x(month_text)+label_hor_offset)
                                             .attr("y", this.y(data_val)+label_vertical_offset)
                                             .attr("font-size", label_font_size)
                                             .attr("text-anchor", "middle")
+                                            .attr("fill", "#08386b")
                                             .attr("font-family", "Bebas Neue")
                                             .text(data_val + "%");
                                         
@@ -171,6 +229,7 @@ export class StackedAreaChart extends BaseChart {
                                                 d3.selectAll(".annotation-note-title")
                                                     .style("font-family", "Glacial Indifference")
                                                     .style("fill", "black")
+                                                    .style("opacity", "1.0")
                                                     .style("font-style", "italic")
                                                     .style("font-size", title_size);
                                                 
@@ -194,7 +253,6 @@ export class StackedAreaChart extends BaseChart {
         animate();  
 
         this.add_legend();
-                    
     }
 
     add_legend(){
@@ -220,11 +278,21 @@ export class StackedAreaChart extends BaseChart {
                 .attr("fill", this.color(d));
 
             // Text label
-            let legend_font_size = (this.chart_width/424)*12;
+            let legend_font_size = 15;
+            let legend_font_size1 = (this.chart_width/424)*15;
+            let legend_font_size2 = (this.chart_height/347.5)*15;
+            if (legend_font_size1 < legend_font_size2){
+                legend_font_size = legend_font_size1;
+            }
+            else{
+                legend_font_size = legend_font_size2;
+            }
+
             legendRow.append("text")
                 .attr("x", 20)
                 .attr("y", 12)
                 .attr("font-size", legend_font_size)
+                .attr("font-family", "Glacial Indifference")
                 .text(d);
         });
     }

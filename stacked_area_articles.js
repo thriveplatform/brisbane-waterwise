@@ -78,7 +78,7 @@ export function redrawCharts(chart_width, chart_height){
       }
   ];
 
-  const color_arr1 = ["green", "gray"];
+  const color_arr1 = ["#369482", "#edebe3"];  //#369482:dark green , edebe3:cream
   const key_arr1 = ["Environmental", "Others"];
   let pos_x1 = 0;
   let pos_y1 = 0;
