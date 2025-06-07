@@ -18,7 +18,7 @@ export function redrawCharts(chart_width, chart_height){
 
   d3.select("body").selectAll("svg").remove();
 
-  var margin = {left:25,right:50,top:100,bottom:0};
+  var margin = {left:25,right:50,top:50,bottom:0};
 
   var svg = d3.select("body")
                 .append("svg")
