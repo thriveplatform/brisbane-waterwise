@@ -10,7 +10,6 @@ export class StackedAreaChart extends BaseChart {
     draw_chart_visual(){
 
         this.y = d3.scaleLinear()
-                        //.domain([0, d3.max(data, d => d.total)]).nice()
                         .domain([0, 100]).nice()
                         .range([this.chart_height, 0]);
 
@@ -27,40 +26,49 @@ export class StackedAreaChart extends BaseChart {
                             .attr("d", d => area(d.slice(0, 1))); // Start with only first point
         
         //Adding the x-axis and its label
+        let x_ticker_size = (this.chart_width/347.5) * 12;
         this.xAxisGroup = this.g.append("g")
                             .attr("transform", `translate(30,${this.chart_height})`)
                             .call(d3.axisBottom(this.x));
         this.xAxisGroup.selectAll("text")
+                            .attr("font-size", x_ticker_size)
                             .attr("font-family", "Glacial Indifference")
                             .attr("transform", "translate(0,10) rotate(-45)");
 
+        let x_axis_label_size = (this.chart_width/424)*15;
         this.g.append("text")
                 .attr("x", this.chart_width/2)
                 .attr("y", this.chart_height+55)
                 .attr("text-anchor", "middle")
                 .attr("font-family", "Glacial Indifference")
+                .attr("font-size", x_axis_label_size)
                 .text("Month");
         
         //Adding the y-axis and its label.
+        let y_ticker_size = (this.chart_height/424) * 12;
         this.yAxisGroup = this.g.append("g")
                 .attr("transform", `translate(30,0)`)
                 .call(d3.axisLeft(this.y));
         this.yAxisGroup.selectAll("text")
+                .attr("font-size", y_ticker_size)
                 .attr("font-family", "Glacial Indifference");
-                
+        
+        let y_axis_label_size = (this.chart_height/347.5)*15;
         this.g.append("text")
             .attr("x", -this.chart_height/2)
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
+            .attr("font-size", y_axis_label_size)
             .attr("font-family", "Glacial Indifference")
             .text("Percentage (%) of Articles");
         
         //Adding the chart title
+        let chart_title_size = (this.chart_width/424)*20;
         this.g.append("text")
             .attr("x", this.chart_width/2+30)
             .attr("y", -10)
-            .attr("font-size", 20)
+            .attr("font-size", chart_title_size)
             .attr("text-anchor", "middle")
             .attr("font-family", "Bebas Neue")
             .text(this.title);
@@ -105,10 +113,11 @@ export class StackedAreaChart extends BaseChart {
                                             label_vertical_offset = -5;
                                         }
 
+                                        let label_font_size = (this.chart_width/424)*12;
                                         this.g.append("text")
                                             .attr("x", this.x(month_text)+label_hor_offset)
                                             .attr("y", this.y(data_val)+label_vertical_offset)
-                                            .attr("font-size", 10)
+                                            .attr("font-size", label_font_size)
                                             .attr("text-anchor", "middle")
                                             .attr("font-family", "Bebas Neue")
                                             .text(data_val + "%");
@@ -125,16 +134,21 @@ export class StackedAreaChart extends BaseChart {
                                                     annotation.y = this.y(data_val-10);
                                                 }
 
-                                                annotation.dx = -1;
-                                                annotation.dy = 0;
+                                                if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
+                                                    annotation.dx = -1
+                                                }
+                                                else{
+                                                    annotation.dx = 0
+                                                }
 
+                                                annotation.dy = 0;
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
                                                 this.g.append("g")
                                                         .call(makeAnnotations)
                                                         .selectAll(".annotation")
-                                                        .data([annotation]) //bind full annotation objects
+                                                        .data([annotation])
                                                         .style("cursor", "pointer")
                                                         .on("click", function(event, d) {
                                                             if (d.url) {
@@ -142,17 +156,13 @@ export class StackedAreaChart extends BaseChart {
                                                             }
                                                         });
                                                 
+                                                let title_size = (this.chart_width/424)*15;
                                                 d3.selectAll(".annotation-note-title")
                                                     .style("font-family", "Glacial Indifference")
                                                     .style("fill", "black")
                                                     .style("font-style", "italic")
-                                                    .style("font-size", "15");
+                                                    .style("font-size", title_size);
                                                 
-                                                d3.selectAll(".annotation-note-label")
-                                                    .style("font-family", "Glacial Indifference")
-                                                    .style("fill", "black")
-                                                    .style("font-size", "10");
-
                                                 // Horizontal line under the note (title/label)
                                                 d3.selectAll(".annotation-note path")
                                                     .style("stroke", "black")
@@ -189,18 +199,22 @@ export class StackedAreaChart extends BaseChart {
 
             const legendRow = legend.append("g")
                                     .attr("transform", `translate(0, ${i * legendSpacing})`);
+            
+            let rect_width = (this.chart_width/424)*15;
+            let rect_height = (this.chart_height/347.5)*15;
 
             // Colored rectangle
             legendRow.append("rect")
-                .attr("width", 15)
-                .attr("height", 15)
+                .attr("width", rect_width)
+                .attr("height", rect_height)
                 .attr("fill", this.color(d));
 
             // Text label
+            let legend_font_size = (this.chart_width/424)*12;
             legendRow.append("text")
                 .attr("x", 20)
                 .attr("y", 12)
-                .attr("font-size", 12)
+                .attr("font-size", legend_font_size)
                 .text(d);
         });
     }

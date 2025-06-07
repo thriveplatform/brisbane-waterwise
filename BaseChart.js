@@ -1,7 +1,7 @@
 export class BaseChart {
 
     constructor(data_object, annotations, key_arr, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
-        
+
         this.data_object = data_object;
         this.key_arr = key_arr;
         this.margin = margin;

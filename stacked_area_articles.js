@@ -19,9 +19,6 @@ export function redrawCharts(chart_width, chart_height){
   d3.select("body").selectAll("svg").remove();
 
   var margin = {left:25,right:50,top:100,bottom:0};
-  //var chart_width = window.innerWidth/4;//450;
-  //var chart_height = window.innerHeight/2;//275;
-
 
   var svg = d3.select("body")
                 .append("svg")
@@ -62,6 +59,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
+          wrap: 120,
           month: "Jul-24",
           url: "https://www.rte.ie/news/world/2024/0717/1460305-paris-mayor-seine/"
       },
@@ -75,6 +73,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
+          wrap: 120,
           month: "Dec-23",
           url: "https://apnews.com/article/olympics-paris-surfing-tahiti-coral-032662b649a34e3d12bf62c87e2ca727"
       }
@@ -115,6 +114,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
+          wrap: 120,
           month: "Jul-24",
           url: "https://www.aljazeera.com/sports/2024/7/30/olympic-mens-triathlon-postponed-due-to-high-pollution-levels-in-seine"
       },
@@ -128,6 +128,7 @@ export function redrawCharts(chart_width, chart_height){
           y: 0,
           dy: 0,
           dx: 0,
+          wrap: 120,
           month: "Dec-23",
           url: "https://www.theguardian.com/sport/2024/apr/09/olympic-triathlon-swimming-leg-could-be-cancelled-over-seine-water-quality"
       }
@@ -138,5 +139,4 @@ export function redrawCharts(chart_width, chart_height){
   let pos_x2 = chart_width+200;//700;
   let pos_y2 = 0;
   let char_instance2 = get_chart_instance("A", data2, annotations2, key_arr2, g, margin, chart_width, chart_height, color_arr2, pos_x2, pos_y2, "Aquatic Focus in Environmental Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveMonotoneX);
-
 }
