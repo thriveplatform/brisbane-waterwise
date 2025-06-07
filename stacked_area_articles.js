@@ -18,7 +18,7 @@ export function redrawCharts(chart_width, chart_height){
 
   d3.select("body").selectAll("svg").remove();
 
-  var margin = {left:25,right:50,top:50,bottom:0};
+  var margin = {left:25,right:25,top:25,bottom:0};
 
   var svg = d3.select("body")
                 .append("svg")
@@ -27,7 +27,6 @@ export function redrawCharts(chart_width, chart_height){
 
   const g = svg.append("g")
               .attr("transform", `translate(${margin.left},${margin.top})`);
-
 
   //First chart
   // Number of articles: environment related and total
@@ -136,7 +135,7 @@ export function redrawCharts(chart_width, chart_height){
 
   const color_arr2 = ["#549ec4", "#8ce3b0"];// skyblue: #549ec4, lightgreen: #8ce3b0
   const key_arr2 = ["Environmental Articles - Aquatic", "Environmental Articles - Non-Aquatic"];
-  let pos_x2 = chart_width+200;//700;
+  let pos_x2 = chart_width+210;
   let pos_y2 = 0;
   let char_instance2 = get_chart_instance("A", data2, annotations2, key_arr2, g, margin, chart_width, chart_height, color_arr2, pos_x2, pos_y2, "Aquatic Focus in Environmental Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveMonotoneX);
 }
