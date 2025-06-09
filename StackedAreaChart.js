@@ -55,7 +55,7 @@ export class StackedAreaChart extends BaseChart {
         }
         this.g.append("text")
                 .attr("x", this.chart_width/2)
-                .attr("y", this.chart_height+55)
+                .attr("y", this.chart_height+55*this.chart_height/347.5)
                 .attr("text-anchor", "middle")
                 .attr("font-family", "Glacial Indifference")
                 .attr("font-size", x_axis_label_size)
@@ -187,12 +187,12 @@ export class StackedAreaChart extends BaseChart {
                                             
                                             if (annotation.month == month_text){
 
-                                                annotation.x = this.x(month_text)+25;
+                                                annotation.x = this.x(month_text) + 25 * this.chart_width/424;
                                                 
                                                 if (data_val == 0){
                                                     annotation.y = this.y(data_val);
                                                 }else{
-                                                    annotation.y = this.y(data_val-30);
+                                                    annotation.y = this.y(data_val-30 * this.chart_height/347.5);
                                                 }
 
                                                 if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
@@ -202,7 +202,7 @@ export class StackedAreaChart extends BaseChart {
                                                     annotation.dx = 0
                                                 }
                                                 
-                                                annotation.dy = this.y(100) - annotation.y + 185;
+                                                annotation.dy = this.y(100) - annotation.y + 185  * this.chart_height/347.5;
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
@@ -261,7 +261,7 @@ export class StackedAreaChart extends BaseChart {
     add_legend(){
         // Position it beside the chart
         const legend = this.g.append("g")
-                            .attr("transform", `translate(${this.chart_width + 40}, 30)`);
+                            .attr("transform", `translate(${this.chart_width + 40 * this.chart_width/424}, 30)`);
 
         //Legend item height and spacing
         const legendSpacing = - 30;
@@ -292,8 +292,8 @@ export class StackedAreaChart extends BaseChart {
             }
 
             legendRow.append("text")
-                .attr("x", 20)
-                .attr("y", 12)
+                .attr("x", 20*this.chart_width/424)
+                .attr("y", 12*this.chart_height/347.5)
                 .attr("font-size", legend_font_size)
                 .attr("font-family", "Glacial Indifference")
                 .text(d);
