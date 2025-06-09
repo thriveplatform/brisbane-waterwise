@@ -149,6 +149,7 @@ export class StackedAreaChart extends BaseChart {
                                         else{
                                             label_hor_offset = 39;
                                         }
+                                        label_hor_offset = label_hor_offset * (this.chart_width/424);
 
                                         let label_vertical_offset = 15;
                                         if (data_val == 0){
@@ -164,6 +165,7 @@ export class StackedAreaChart extends BaseChart {
                                         if (i == 12 && data_val == 73){
                                             label_vertical_offset = 40;
                                         }
+                                        label_vertical_offset = label_vertical_offset * (this.chart_height/347.5);
                                         
                                         let label_font_size = 18;
                                         let label_font_size1 = (this.chart_width/424) * 18;
