@@ -139,7 +139,7 @@ export class StackedAreaChart extends BaseChart {
                                         let data_val = this.stackedData[0][i-1][1];
                                         
                                         let label_hor_offset = 0;
-                                        if (month_text == "Jul-24"){
+                                        if (month_text == "Aug-24"){
                                             label_hor_offset = 15;
                                         }
                                         else if (month_text == "Aug-23"){
@@ -216,7 +216,7 @@ export class StackedAreaChart extends BaseChart {
                                                 else{
                                                     title_size = title_size2;
                                                 }
-                                                
+
                                                 annotation.note = {
                                                     ...annotation.note,
                                                     titleFontSize: title_size
