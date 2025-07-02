@@ -2,8 +2,8 @@ import { BaseChart } from './BaseChart.js';
 
 export class StackedAreaChart extends BaseChart {
 
-    constructor(data_object, annotations, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
-        super(data_object, annotations, key_arr, chart_type, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType);
+    constructor(data_object, annotations, key_arr, chart_type, group, margin, chart_width, full_chart_width, chart_height, full_chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
+        super(data_object, annotations, key_arr, chart_type, group, margin, chart_width, full_chart_width, chart_height, full_chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType);
 
     }
 
@@ -27,8 +27,8 @@ export class StackedAreaChart extends BaseChart {
         
         //Adding the x-axis and its label
         let x_ticker_size = 12;
-        let x_ticker_size1 = (this.chart_width/424) * 12;
-        let x_ticker_size2 = (this.chart_height/347.5) * 12;
+        let x_ticker_size1 = (this.chart_width/this.full_chart_width) * 12;
+        let x_ticker_size2 = (this.chart_height/this.full_chart_height) * 12;
         if (x_ticker_size1 < x_ticker_size2){
             x_ticker_size = x_ticker_size1;
         }
@@ -45,8 +45,8 @@ export class StackedAreaChart extends BaseChart {
 
 
         let x_axis_label_size = 18;
-        let x_axis_label_size1 = (this.chart_width/424) * 18;
-        let x_axis_label_size2 = (this.chart_height/347.5) * 18;
+        let x_axis_label_size1 = (this.chart_width/this.full_chart_width) * 18;
+        let x_axis_label_size2 = (this.chart_height/this.full_chart_height) * 18;
         if (x_axis_label_size1 < x_axis_label_size2){
             x_axis_label_size = x_axis_label_size1;
         }
@@ -55,7 +55,7 @@ export class StackedAreaChart extends BaseChart {
         }
         this.g.append("text")
                 .attr("x", this.chart_width/2)
-                .attr("y", this.chart_height+55*this.chart_height/347.5)
+                .attr("y", this.chart_height+55*this.chart_height/this.full_chart_height)
                 .attr("text-anchor", "middle")
                 .attr("font-family", "Glacial Indifference")
                 .attr("font-size", x_axis_label_size)
@@ -63,8 +63,8 @@ export class StackedAreaChart extends BaseChart {
         
         //Adding the y-axis and its label.
         let y_ticker_size = 12;
-        let y_ticker_size1 = (this.chart_width/424) * 12;
-        let y_ticker_size2 = (this.chart_height/347.5) * 12;
+        let y_ticker_size1 = (this.chart_width/this.full_chart_width) * 12;
+        let y_ticker_size2 = (this.chart_height/this.full_chart_height) * 12;
         if (y_ticker_size1 < y_ticker_size2){
             y_ticker_size = y_ticker_size1;
         }
@@ -80,8 +80,8 @@ export class StackedAreaChart extends BaseChart {
         
         
         let y_axis_label_size = 18;
-        let y_axis_label_size1 = (this.chart_width/424) * 18;
-        let y_axis_label_size2 = (this.chart_height/347.5) * 18;
+        let y_axis_label_size1 = (this.chart_width/this.full_chart_width) * 18;
+        let y_axis_label_size2 = (this.chart_height/this.full_chart_height) * 18;
         if (y_axis_label_size1 < y_axis_label_size2){
             y_axis_label_size = y_axis_label_size1;
         }
@@ -99,8 +99,8 @@ export class StackedAreaChart extends BaseChart {
         
         //Adding the chart title
         let chart_title_size = 20;
-        let chart_title_size1 = (this.chart_width/424) * 20;
-        let chart_title_size2 = (this.chart_height/347.5) * 20;
+        let chart_title_size1 = (this.chart_width/this.full_chart_width) * 20;
+        let chart_title_size2 = (this.chart_height/this.full_chart_height) * 20;
         if (chart_title_size1 < chart_title_size2){
             chart_title_size = chart_title_size1;
         }
@@ -149,7 +149,7 @@ export class StackedAreaChart extends BaseChart {
                                         else{
                                             label_hor_offset = 39;
                                         }
-                                        label_hor_offset = label_hor_offset * (this.chart_width/424);
+                                        label_hor_offset = label_hor_offset * (this.chart_width/this.full_chart_width);
 
                                         let label_vertical_offset = 15;
                                         if (data_val == 0){
@@ -165,11 +165,11 @@ export class StackedAreaChart extends BaseChart {
                                         if (i == 12 && data_val == 73){
                                             label_vertical_offset = 40;
                                         }
-                                        label_vertical_offset = label_vertical_offset * (this.chart_height/347.5);
+                                        label_vertical_offset = label_vertical_offset * (this.chart_height/this.full_chart_height);
                                         
                                         let label_font_size = 18;
-                                        let label_font_size1 = (this.chart_width/424) * 18;
-                                        let label_font_size2 = (this.chart_height/347.5) * 18;
+                                        let label_font_size1 = (this.chart_width/this.full_chart_width) * 18;
+                                        let label_font_size2 = (this.chart_height/this.full_chart_height) * 18;
                                         if (label_font_size1 < label_font_size2){
                                             label_font_size = label_font_size1;
                                         }
@@ -189,13 +189,14 @@ export class StackedAreaChart extends BaseChart {
                                             
                                             if (annotation.month == month_text){
 
-                                                annotation.x = this.x(month_text) + 25 * this.chart_width/424;
+                                                annotation.x = this.x(month_text) + 25 * this.chart_width/this.full_chart_width;
                                                 
-                                                if (data_val == 0){
+                                                /*if (data_val == 0){
                                                     annotation.y = this.y(data_val);
                                                 }else{
-                                                    annotation.y = this.y(data_val-30 * this.chart_height/347.5);
-                                                }
+                                                    annotation.y = this.y(data_val-30 * this.chart_height/this.full_chart_height);
+                                                }*/
+                                               annotation.y = this.y(0);
 
                                                 if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
                                                     annotation.dx = -1
@@ -203,8 +204,24 @@ export class StackedAreaChart extends BaseChart {
                                                 else{
                                                     annotation.dx = 0
                                                 }
+                                                annotation.dy = this.y(annotation.dy*this.chart_height/this.full_chart_height) - annotation.y;
                                                 
-                                                annotation.dy = this.y(100) - annotation.y + 185  * this.chart_height/347.5;
+                                                let title_size = 15;
+                                                let title_size1 = (this.chart_width/this.full_chart_width)*15;
+                                                let title_size2 = (this.chart_height/this.full_chart_height)*15;
+                                                
+                                                if (title_size1 < title_size2){
+                                                    title_size = title_size1;
+                                                }
+                                                else{
+                                                    title_size = title_size2;
+                                                }
+                                                
+                                                annotation.note = {
+                                                    ...annotation.note,
+                                                    titleFontSize: title_size
+                                                };
+                                                
                                                 const makeAnnotations = d3.annotation()
                                                                             .annotations([annotation]);
 
@@ -219,24 +236,12 @@ export class StackedAreaChart extends BaseChart {
                                                             }
                                                         });
                                                 
-
-                                                let title_size = 15;
-                                                let title_size1 = (this.chart_width/424)*15;
-                                                let title_size2 = (this.chart_height/347.5)*15;
-                                                
-                                                if (title_size1 < title_size2){
-                                                    title_size = title_size1;
-                                                }
-                                                else{
-                                                    title_size = title_size2;
-                                                }
-
                                                 d3.selectAll(".annotation-note-title")
+                                                    .style("font-size", title_size)
                                                     .style("font-family", "Glacial Indifference")
                                                     .style("fill", "black")
-                                                    .style("opacity", "1.0")
-                                                    .style("font-style", "italic")
-                                                    .style("font-size", title_size);
+                                                    .style("opacity", "0.5")
+                                                    .style("font-style", "italic");
                                                 
                                                 // Horizontal line under the note (title/label)
                                                 d3.selectAll(".annotation-note path")
@@ -263,7 +268,7 @@ export class StackedAreaChart extends BaseChart {
     add_legend(){
         // Position it beside the chart
         const legend = this.g.append("g")
-                            .attr("transform", `translate(${this.chart_width + 40 * this.chart_width/424}, 30)`);
+                            .attr("transform", `translate(${this.chart_width + 40 * this.chart_width/this.full_chart_width}, 30)`);
 
         //Legend item height and spacing
         const legendSpacing = - 30;
@@ -273,8 +278,8 @@ export class StackedAreaChart extends BaseChart {
             const legendRow = legend.append("g")
                                     .attr("transform", `translate(0, ${i * legendSpacing})`);
             
-            let rect_width = (this.chart_width/424)*15;
-            let rect_height = (this.chart_height/347.5)*15;
+            let rect_width = (this.chart_width/this.full_chart_width)*15;
+            let rect_height = (this.chart_height/this.full_chart_height)*15;
 
             // Colored rectangle
             legendRow.append("rect")
@@ -284,8 +289,8 @@ export class StackedAreaChart extends BaseChart {
 
             // Text label
             let legend_font_size = 15;
-            let legend_font_size1 = (this.chart_width/424)*15;
-            let legend_font_size2 = (this.chart_height/347.5)*15;
+            let legend_font_size1 = (this.chart_width/this.full_chart_width)*15;
+            let legend_font_size2 = (this.chart_height/this.full_chart_height)*15;
             if (legend_font_size1 < legend_font_size2){
                 legend_font_size = legend_font_size1;
             }
@@ -294,8 +299,8 @@ export class StackedAreaChart extends BaseChart {
             }
 
             legendRow.append("text")
-                .attr("x", 20*this.chart_width/424)
-                .attr("y", 12*this.chart_height/347.5)
+                .attr("x", 20*this.chart_width/this.full_chart_width)
+                .attr("y", 12*this.chart_height/this.full_chart_height)
                 .attr("font-size", legend_font_size)
                 .attr("font-family", "Glacial Indifference")
                 .text(d);

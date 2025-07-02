@@ -1,6 +1,6 @@
 export class BaseChart {
 
-    constructor(data_object, annotations, key_arr, group, margin, chart_width, chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
+    constructor(data_object, annotations, key_arr, group, margin, chart_width, full_chart_width, chart_height, full_chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType){
 
         this.data_object = data_object;
         this.key_arr = key_arr;
@@ -15,6 +15,8 @@ export class BaseChart {
         this.ylabel = ylabel;
         this.curveType = curveType;
         this.annotations = annotations;
+        this.full_chart_width = full_chart_width;
+        this.full_chart_height = full_chart_height;
 
         //Create a group
         this.g = group.append("g")
