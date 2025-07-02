@@ -6,6 +6,7 @@ function get_chart_instance(chart_type, data_object, annotations, key_arr, group
   switch (chart_type){
     case 'A'://Area Chart
       let area_chart = new StackedAreaChart(data_object, annotations, key_arr, group, margin, chart_width, full_chart_width, chart_height, full_chart_height, color_arr, pos_x, pos_y, title, xlabel, ylabel, curveType);
+      area_chart.remove_annotations();
       return area_chart;
 
     default:

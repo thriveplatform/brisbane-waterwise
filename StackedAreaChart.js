@@ -184,7 +184,7 @@ export class StackedAreaChart extends BaseChart {
                                             .attr("fill", "#08386b")
                                             .attr("font-family", "Bebas Neue")
                                             .text(data_val + "%");
-                                        
+
                                         this.annotations.forEach(annotation => {
                                             
                                             if (annotation.month == month_text){
