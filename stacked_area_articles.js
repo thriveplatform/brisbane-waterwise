@@ -55,6 +55,7 @@ export function redrawCharts(chart_width, chart_height){
       {
           note: {
               title: "Paris 2024 chief pledges to find solutions to keep Olympic surfing in Tahiti after coral damage",
+              label: "AP News, 2023",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
@@ -70,6 +71,7 @@ export function redrawCharts(chart_width, chart_height){
           note: {
               //label: "The Associated Press",
               title: "Paris mayor to swim in Seine to prove cleanliness",
+              label: "RTÉ, 2024",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
@@ -112,6 +114,7 @@ export function redrawCharts(chart_width, chart_height){
       {
           note: {
               title: "Aluminium tower construction in Tahiti for Olympic surf event paused after barge damages coral",
+              label: "CNN, 2023",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
@@ -126,6 +129,7 @@ export function redrawCharts(chart_width, chart_height){
       {
           note: {
               title: "Illness and withdrawals ahead of mixed relay triathlon",
+              label: "RTÉ, 2024",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
