@@ -15,16 +15,16 @@ function get_chart_instance(chart_type, data_object, annotations, key_arr, group
   }
 }
 
-export function redrawCharts(chart_width, chart_height){
+export function redrawCharts(chart_width, chart_height, chart_container){
 
   var FULL_CHART_WIDTH = 444;
   var FULL_CHART_HEIGHT = 463;
 
-  d3.select("body").selectAll("svg").remove();
+  d3.select(chart_container).selectAll("svg").remove();
 
   var margin = {left:50,right:25,top:50,bottom:0};
 
-  var svg = d3.select("body")
+  var svg = d3.select(chart_container)
                 .append("svg")
                   .attr("height", "100%")
                   .attr("width", "100%");

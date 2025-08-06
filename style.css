@@ -17,8 +17,6 @@ g.tick line {
   stroke: black;
 }
 
-
-
 g.hidden line,
 g.hidden path {
   display: none;
