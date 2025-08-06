@@ -11,7 +11,7 @@ export class StackedAreaChart extends BaseChart {
 
         this.y = d3.scaleLinear()
                         .domain([0, 100]).nice()
-                        .range([this.chart_height, 0]);
+                        .range([this.chart_height * window.innerHeight/695, 0]);
 
         const area = d3.area()
                         .x((d, i) => this.x(this.data_object[i].month))
@@ -36,13 +36,13 @@ export class StackedAreaChart extends BaseChart {
             x_ticker_size = x_ticker_size2;
         }
         this.xAxisGroup = this.g.append("g")
-                            .attr("transform", `translate(30,${this.chart_height})`)
+                            .attr("transform", `translate(30,${this.chart_height * window.innerHeight/695})`)
                             .call(d3.axisBottom(this.x));
+        
         this.xAxisGroup.selectAll("text")
                             .attr("font-size", x_ticker_size)
                             .attr("font-family", "Glacial Indifference")
                             .attr("transform", "translate(0,10) rotate(-45)");
-
 
         let x_axis_label_size = 18;
         let x_axis_label_size1 = (this.chart_width/this.full_chart_width) * 18;
@@ -191,12 +191,7 @@ export class StackedAreaChart extends BaseChart {
 
                                                 annotation.x = this.x(month_text) + 25 * this.chart_width/this.full_chart_width;
                                                 
-                                                /*if (data_val == 0){
-                                                    annotation.y = this.y(data_val);
-                                                }else{
-                                                    annotation.y = this.y(data_val-30 * this.chart_height/this.full_chart_height);
-                                                }*/
-                                               annotation.y = this.y(0);
+                                                annotation.y = this.y(0);
 
                                                 if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
                                                     annotation.dx = -1

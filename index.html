@@ -2,9 +2,10 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>News Coverage in the Year Leading up to Paris 2024: Spotlight on Environment and Water</title>
+		<title>
+			News Coverage in the Year Leading up to Paris 2024: Spotlight on Environment AND Water
+		</title>
 		<link rel="stylesheet" type="text/css" href="style.css" >
-		<!--<script type="text/javascript" src="d3.v4.js"></script>-->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Glacial+Indifference&display=swap" rel="stylesheet">
@@ -12,22 +13,27 @@
 	</head>
 
 	<body>
-		<h2 style="font-family: 'Bebas Neue'" align = "center">News Coverage in the Year Leading up to Paris 2024: Spotlight on Environment and Water</h2>
-		<div id="chart-container" style="width:100%; height:500px;"></div>
+		<h2 style="font-family: 'Bebas Neue'" align = "center">
+			News Coverage in the Year Leading up to Paris 2024: Spotlight on Environment and Water<br>
+			Source: <a href="https://github.com/thriveplatform/brisbane-waterwise" target="_blank">THRIVE Project</a>, 2025
+			
+		</h2>
+		<div id="chart-container" style="width:100%"></div>
 		<script type="module">
 			import { redrawCharts } from './stacked_area_articles.js';
-
+			console.log('-----', window.innerWidth, window.innerHeight);
 			var chart_width = window.innerWidth/4 + 60 * window.innerWidth/1536;
-			var chart_height = window.innerHeight/1.5;
+			//var chart_height = window.innerHeight/1.5;
+			var chart_height = window.innerHeight/695 * window.innerHeight/1.5;
 
 			function resizeChart(){
   				var FULL_CHART_HEIGHT = 463;
 
 				chart_width = window.innerWidth/4 + 60 * window.innerWidth/1536;
-				chart_height = window.innerHeight/1.5;
+				//chart_height = window.innerHeight/1.5;
+				chart_height = window.innerHeight/695 * window.innerHeight/1.5;
 				
 				const container = document.getElementById("chart-container");
-  				//container.style.width = chart_width + "px";
 				var footer_padding = 90
   				container.style.height = chart_height + footer_padding * chart_height/FULL_CHART_HEIGHT +"px";
 
@@ -38,7 +44,7 @@
 			window.onresize = resizeChart;
 			
 		</script>
-		<footer style="margin-top: 20px; padding: 10px; text-align: center; font-size: 0.9em; color: black;">
+		<footer style="margin-top: 10px; padding: 10px; text-align: center; font-size: 0.8em; color: black;">
 			Complete methodology and dataset on
 			<a href="https://github.com/thriveplatform/brisbane-waterwise" target="_blank">
 				GitHub
@@ -46,6 +52,5 @@
 		</footer>
 
   	</body>
-
 
 </html>

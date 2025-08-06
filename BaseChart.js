@@ -52,7 +52,7 @@ export class BaseChart {
         this.months = this.data_object.map(d => d.month);
         this.x = d3.scalePoint()
                         .domain(this.months)
-                        .range([0, chart_width]);
+                        .range([0, chart_width * window.innerWidth/1536]);
         
         //Setting the colours.
         this.color = d3.scaleOrdinal()
