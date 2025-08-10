@@ -9,9 +9,10 @@ export class StackedAreaChart extends BaseChart {
 
     draw_chart_visual(){
 
+        var scale_height = (this.chart_height - 20) * this.chart_height/this.full_chart_height;
         this.y = d3.scaleLinear()
                         .domain([0, 100]).nice()
-                        .range([this.chart_height * window.innerHeight/695, 0]);
+                        .range([scale_height, 0]);
 
         const area = d3.area()
                         .x((d, i) => this.x(this.data_object[i].month))
@@ -26,62 +27,65 @@ export class StackedAreaChart extends BaseChart {
                             .attr("d", d => area(d.slice(0, 1))); // Start with only first point
         
         //Adding the x-axis and its label
-        let x_ticker_size = 12;
-        let x_ticker_size1 = (this.chart_width/this.full_chart_width) * 12;
-        let x_ticker_size2 = (this.chart_height/this.full_chart_height) * 12;
+        this.xAxisGroup = this.g.append("g")
+                            //.attr("transform", `translate(30,${this.chart_height})`)
+                            .attr("transform", `translate(30,${scale_height})`)
+                            .call(d3.axisBottom(this.x));
+
+        let x_ticker_size = 14;
+        let x_ticker_size1 = (this.chart_width/this.full_chart_width) * 14;
+        let x_ticker_size2 = scale_height/this.chart_height * 14;//Math.pow(scale_height/this.chart_height, 0.5) * 14;
         if (x_ticker_size1 < x_ticker_size2){
             x_ticker_size = x_ticker_size1;
         }
         else{
             x_ticker_size = x_ticker_size2;
         }
-        this.xAxisGroup = this.g.append("g")
-                            .attr("transform", `translate(30,${this.chart_height * window.innerHeight/695})`)
-                            .call(d3.axisBottom(this.x));
-        
         this.xAxisGroup.selectAll("text")
                             .attr("font-size", x_ticker_size)
                             .attr("font-family", "Glacial Indifference")
                             .attr("transform", "translate(0,10) rotate(-45)");
 
-        let x_axis_label_size = 18;
-        let x_axis_label_size1 = (this.chart_width/this.full_chart_width) * 18;
-        let x_axis_label_size2 = (this.chart_height/this.full_chart_height) * 18;
+        //let x_axis_label_size = (this.chart_width/this.full_chart_width) * 16;
+        let x_axis_label_size = 16;
+        let x_axis_label_size1 = (this.chart_width/this.full_chart_width) * 16;
+        let x_axis_label_size2 = Math.pow(scale_height/this.chart_height, 0.5) * 16;
         if (x_axis_label_size1 < x_axis_label_size2){
             x_axis_label_size = x_axis_label_size1;
         }
         else{
             x_axis_label_size = x_axis_label_size2;
         }
-        this.g.append("text")
+        /*this.g.append("text")
                 .attr("x", this.chart_width/2)
-                .attr("y", this.chart_height+55*this.chart_height/this.full_chart_height)
+                .attr("y", (scale_height+60*scale_height/this.chart_height))
                 .attr("text-anchor", "middle")
                 .attr("font-family", "Glacial Indifference")
                 .attr("font-size", x_axis_label_size)
-                .text("Month");
+                .text("Month");*/
         
         //Adding the y-axis and its label.
-        let y_ticker_size = 12;
-        let y_ticker_size1 = (this.chart_width/this.full_chart_width) * 12;
-        let y_ticker_size2 = (this.chart_height/this.full_chart_height) * 12;
+        this.yAxisGroup = this.g.append("g")
+                .attr("transform", `translate(30,0)`)
+                .call(d3.axisLeft(this.y));
+        let y_ticker_size = 14;
+        //let y_ticker_size1 = (this.chart_height/this.full_chart_height) * 14;
+        let y_ticker_size1 = this.chart_width/this.full_chart_width * 14;
+        let y_ticker_size2 = Math.pow((scale_height/this.chart_height), 0.5) * 14;
         if (y_ticker_size1 < y_ticker_size2){
             y_ticker_size = y_ticker_size1;
         }
         else{
             y_ticker_size = y_ticker_size2;
         }
-        this.yAxisGroup = this.g.append("g")
-                .attr("transform", `translate(30,0)`)
-                .call(d3.axisLeft(this.y));
+
         this.yAxisGroup.selectAll("text")
                 .attr("font-size", y_ticker_size)
                 .attr("font-family", "Glacial Indifference");
         
-        
-        let y_axis_label_size = 18;
-        let y_axis_label_size1 = (this.chart_width/this.full_chart_width) * 18;
-        let y_axis_label_size2 = (this.chart_height/this.full_chart_height) * 18;
+        let y_axis_label_size = 16;
+        let y_axis_label_size1 = (scale_height/this.chart_height) * 16;
+        let y_axis_label_size2 = Math.pow(this.chart_width/this.full_chart_width, 0.5) * 16;
         if (y_axis_label_size1 < y_axis_label_size2){
             y_axis_label_size = y_axis_label_size1;
         }
@@ -89,7 +93,8 @@ export class StackedAreaChart extends BaseChart {
             y_axis_label_size = y_axis_label_size2;
         }
         this.g.append("text")
-            .attr("x", -this.chart_height/2)
+            //.attr("x", -this.chart_height/2)
+            .attr("x", -scale_height/2)
             .attr("y", 0)
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
@@ -100,7 +105,7 @@ export class StackedAreaChart extends BaseChart {
         //Adding the chart title
         let chart_title_size = 20;
         let chart_title_size1 = (this.chart_width/this.full_chart_width) * 20;
-        let chart_title_size2 = (this.chart_height/this.full_chart_height) * 20;
+        let chart_title_size2 = Math.pow(scale_height/this.chart_height, 0.5) * 20;
         if (chart_title_size1 < chart_title_size2){
             chart_title_size = chart_title_size1;
         }
@@ -165,20 +170,21 @@ export class StackedAreaChart extends BaseChart {
                                         if (i == 12 && data_val == 73){
                                             label_vertical_offset = 40;
                                         }
-                                        label_vertical_offset = label_vertical_offset * (this.chart_height/this.full_chart_height);
+                                        label_vertical_offset = label_vertical_offset * (scale_height/this.chart_height);
                                         
-                                        let label_font_size = 18;
-                                        let label_font_size1 = (this.chart_width/this.full_chart_width) * 18;
-                                        let label_font_size2 = (this.chart_height/this.full_chart_height) * 18;
+                                        let label_font_size = 16;
+                                        let label_font_size1 = (this.chart_width/this.full_chart_width) * 16;
+                                        let label_font_size2 = (this.chart_height/this.full_chart_height) * 16;
                                         if (label_font_size1 < label_font_size2){
                                             label_font_size = label_font_size1;
+                                            
                                         }
                                         else{
                                             label_font_size = label_font_size2;
                                         }
                                         this.g.append("text")
-                                            .attr("x", this.x(month_text)+label_hor_offset)
-                                            .attr("y", this.y(data_val)+label_vertical_offset)
+                                            .attr("x", this.x(month_text) + label_hor_offset)
+                                            .attr("y", this.y(data_val) + label_vertical_offset)
                                             .attr("font-size", label_font_size)
                                             .attr("text-anchor", "middle")
                                             .attr("fill", "#08386b")
@@ -189,21 +195,31 @@ export class StackedAreaChart extends BaseChart {
                                             
                                             if (annotation.month == month_text){
 
-                                                annotation.x = this.x(month_text) + 25 * this.chart_width/this.full_chart_width;
+                                                annotation.x = this.x(month_text) + 30;// * this.chart_width/this.full_chart_width;// + 25 * this.chart_width/this.full_chart_width;
                                                 
                                                 annotation.y = this.y(0);
 
+                                                //annotation.dx = -1;
                                                 if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
                                                     annotation.dx = -1
                                                 }
                                                 else{
                                                     annotation.dx = 0
                                                 }
-                                                annotation.dy = this.y(annotation.dy*this.chart_height/this.full_chart_height) - annotation.y;
+                                                
+                                                //annotation.dy = this.y(annotation.dy*this.chart_height/this.full_chart_height) - annotation.y;//-60 * this.chart_height/this.full_chart_height;
+                                                //annotation.dy = annotation.dy * this.chart_height/this.full_chart_height;
+                                                //annotation.dy = annotation.dy * Math.pow(this.chart_height/this.full_chart_height, 3);
+                                                console.log('before', annotation.dy);
+                                                annotation.dy = annotation.dy * Math.pow(this.chart_height/this.full_chart_height, 3);
+                                                console.log('after', annotation.dy);
+                                                
+                                                
                                                 
                                                 let title_size = 15;
                                                 let title_size1 = (this.chart_width/this.full_chart_width)*15;
-                                                let title_size2 = (this.chart_height/this.full_chart_height)*15;
+                                                //let title_size2 = (this.chart_height/this.full_chart_height)*15;
+                                                let title_size2 = (scale_height/this.chart_height)*15;
                                                 
                                                 if (title_size1 < title_size2){
                                                     title_size = title_size1;
@@ -235,17 +251,38 @@ export class StackedAreaChart extends BaseChart {
                                                     .style("font-size", title_size)
                                                     .style("font-family", "Glacial Indifference")
                                                     .style("fill", "black")
-                                                    .style("opacity", "0.5")
+                                                    .style("opacity", "1")
                                                     .style("font-style", "italic");
+                                                
+                                                d3.selectAll(".annotation-note-label")
+                                                    .style("font-size", title_size)
+                                                    .style("font-family", "Glacial Indifference")
+                                                    .style("fill", "black")
+                                                    .style("opacity", "1")
+                                                    .style("font-style", "normal");
                                                 
                                                 // Horizontal line under the note (title/label)
                                                 d3.selectAll(".annotation-note path")
                                                     .style("stroke", "black")
                                                     .style("stroke-width", "1px");
                                                 
+                                                d3.select("svg").append("defs").append("marker")
+                                                    .attr("id", "arrowhead")
+                                                    .attr("viewBox", "0 -5 10 10")
+                                                    .attr("refX", 10) // Adjust based on your line length/placement
+                                                    .attr("refY", 0)
+                                                    .attr("markerWidth", 6)
+                                                    .attr("markerHeight", 6)
+                                                    .attr("orient", "90")
+                                                    .append("path")
+                                                    .attr("d", "M0,-5L10,0L0,5") // Triangle shape
+                                                    //.attr("d", "M100,100 L100,300") // Triangle shape
+                                                    .attr("fill", "black");
+                                                
                                                 d3.selectAll(".annotation-connector path")
                                                     .style("stroke", "black")      // Change the line color
-                                                    .style("stroke-width", "1px"); // Optional: make the line thicker
+                                                    .style("stroke-width", "1px") // Optional: make the line thicker
+                                                    .attr("marker-start", "url(#arrowhead)");
                                             }
                                         });
                                     }

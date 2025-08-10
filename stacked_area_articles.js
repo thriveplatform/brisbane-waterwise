@@ -17,8 +17,11 @@ function get_chart_instance(chart_type, data_object, annotations, key_arr, group
 
 export function redrawCharts(chart_width, chart_height, chart_container){
 
-  var FULL_CHART_WIDTH = 444;
-  var FULL_CHART_HEIGHT = 463;
+  console.log(chart_width, chart_height);
+  //var FULL_CHART_WIDTH = 444;
+  //var FULL_CHART_HEIGHT = 463;
+  var FULL_CHART_WIDTH = 508;
+  var FULL_CHART_HEIGHT = 405;
 
   d3.select(chart_container).selectAll("svg").remove();
 
@@ -61,7 +64,8 @@ export function redrawCharts(chart_width, chart_height, chart_container){
           },
           x: 0,
           y: chart_height,
-          dy: 50,
+          //dy: 50,
+          dy: -40,
           dx: 0,
           wrap: 140,
           month: "Dec-23",
@@ -77,7 +81,7 @@ export function redrawCharts(chart_width, chart_height, chart_container){
           },
           x: 0,
           y: chart_height,
-          dy: 20,
+          dy: -180,
           dx: 0,
           wrap: 140,
           month: "Jul-24",
@@ -120,7 +124,8 @@ export function redrawCharts(chart_width, chart_height, chart_container){
           },
           x: 0,
           y: chart_height,
-          dy: 40,
+          //dy: 40,
+          dy: -40,
           dx: 0,
           wrap: 120,
           month: "Dec-23",
@@ -135,7 +140,8 @@ export function redrawCharts(chart_width, chart_height, chart_container){
           },
           x: 0,
           y: chart_height,
-          dy: 20,
+          //dy: 20,
+          dy: -180,
           dx: 0,
           wrap: 120,
           month: "Aug-24",
@@ -145,7 +151,9 @@ export function redrawCharts(chart_width, chart_height, chart_container){
 
   const color_arr2 = ["#549ec4", "#8ce3b0"];// skyblue: #549ec4, lightgreen: #8ce3b0
   const key_arr2 = ["Environmental - Aquatic", "Environmental - Non-Aquatic"];
-  let pos_x2 = chart_width + 190 * window.innerWidth/1536;
+  //let pos_x2 = chart_width + 190 * window.innerWidth/1536;
+  
+  let pos_x2 = chart_width + 190 * chart_width/FULL_CHART_WIDTH;
   let pos_y2 = 0;
   
   let char_instance2 = get_chart_instance("A", data2, annotations2, key_arr2, g, margin, chart_width, FULL_CHART_WIDTH, chart_height, FULL_CHART_HEIGHT, color_arr2, pos_x2, pos_y2, "Aquatic Focus in Environmental Articles Leading up to the Olympics", "Month", "Percentage(%) of Articles", d3.curveMonotoneX);

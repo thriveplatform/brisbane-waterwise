@@ -50,9 +50,10 @@ export class BaseChart {
 
         //Preparing the x-axis scale.
         this.months = this.data_object.map(d => d.month);
+        
         this.x = d3.scalePoint()
                         .domain(this.months)
-                        .range([0, chart_width * window.innerWidth/1536]);
+                        .range([0, chart_width]);
         
         //Setting the colours.
         this.color = d3.scaleOrdinal()

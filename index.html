@@ -20,22 +20,30 @@
 		</h2>
 		<div id="chart-container" style="width:100%"></div>
 		<script type="module">
+			var FULL_CHART_HEIGHT = 695;
+			var FULL_CHART_WIDTH = 1536;
+
 			import { redrawCharts } from './stacked_area_articles.js';
-			console.log('-----', window.innerWidth, window.innerHeight);
-			var chart_width = window.innerWidth/4 + 60 * window.innerWidth/1536;
+			var chart_width = window.innerWidth/4 + 60 * window.innerWidth/FULL_CHART_WIDTH;
+			//var chart_width = (window.innerWidth/FULL_CHART_WIDTH) * (window.innerWidth/2 - 260);
 			//var chart_height = window.innerHeight/1.5;
-			var chart_height = window.innerHeight/695 * window.innerHeight/1.5;
-
+			//var chart_height = window.innerHeight/695 * window.innerHeight/1.5;
+			//var chart_height = window.innerHeight - 350 * window.innerHeight/695;
+			var chart_height = window.innerHeight - 290 * window.innerHeight/FULL_CHART_HEIGHT;//(window.innerHeight - 290) * window.innerHeight/FULL_CHART_HEIGHT;
+			
 			function resizeChart(){
-  				var FULL_CHART_HEIGHT = 463;
 
-				chart_width = window.innerWidth/4 + 60 * window.innerWidth/1536;
+				chart_width = window.innerWidth/4 + 60 * window.innerWidth/FULL_CHART_WIDTH;
+				//chart_width = (window.innerWidth - 1030) * window.innerWidth/FULL_CHART_WIDTH;
+				//chart_width = (window.innerWidth/FULL_CHART_WIDTH) * (window.innerWidth/2 - 260);
+
 				//chart_height = window.innerHeight/1.5;
-				chart_height = window.innerHeight/695 * window.innerHeight/1.5;
+				//chart_height = window.innerHeight/695 * window.innerHeight/1.5;
+				chart_height = window.innerHeight - 290 * window.innerHeight/FULL_CHART_HEIGHT;//(window.innerHeight - 290) * window.innerHeight/FULL_CHART_HEIGHT;
 				
 				const container = document.getElementById("chart-container");
-				var footer_padding = 90
-  				container.style.height = chart_height + footer_padding * chart_height/FULL_CHART_HEIGHT +"px";
+				var footer_padding = 100;
+  				container.style.height = (chart_height + footer_padding) * window.innerHeight/FULL_CHART_HEIGHT +"px";
 
 				redrawCharts(chart_width, chart_height, "#chart-container");
 			}
@@ -44,7 +52,7 @@
 			window.onresize = resizeChart;
 			
 		</script>
-		<footer style="margin-top: 10px; padding: 10px; text-align: center; font-size: 0.8em; color: black;">
+		<footer style="margin-top: 20px; padding: 10px; text-align: center; font-size: 0.9em; color: black;">
 			Complete methodology and dataset on
 			<a href="https://github.com/thriveplatform/brisbane-waterwise" target="_blank">
 				GitHub
