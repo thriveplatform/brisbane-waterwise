@@ -198,23 +198,23 @@ export class StackedAreaChart extends BaseChart {
                                                 annotation.x = this.x(month_text) + 30;// * this.chart_width/this.full_chart_width;// + 25 * this.chart_width/this.full_chart_width;
                                                 
                                                 annotation.y = this.y(0);
-
-                                                //annotation.dx = -1;
-                                                if ((annotation.x + annotation.dx - annotation.wrap) > 0 ){
-                                                    annotation.dx = -1
+                                                
+                                                if ((month_text == 'Jul-24') || (month_text == 'Aug-24')){
+                                                    annotation.dx = -1;
                                                 }
                                                 else{
-                                                    annotation.dx = 0
+                                                    if (this.chart_width < 345){
+                                                        annotation.dx = +1;
+                                                    }
+                                                    else{
+                                                        annotation.dx = -1;
+                                                    }
                                                 }
                                                 
                                                 //annotation.dy = this.y(annotation.dy*this.chart_height/this.full_chart_height) - annotation.y;//-60 * this.chart_height/this.full_chart_height;
                                                 //annotation.dy = annotation.dy * this.chart_height/this.full_chart_height;
                                                 //annotation.dy = annotation.dy * Math.pow(this.chart_height/this.full_chart_height, 3);
-                                                console.log('before', annotation.dy);
                                                 annotation.dy = annotation.dy * Math.pow(this.chart_height/this.full_chart_height, 3);
-                                                console.log('after', annotation.dy);
-                                                
-                                                
                                                 
                                                 let title_size = 15;
                                                 let title_size1 = (this.chart_width/this.full_chart_width)*15;

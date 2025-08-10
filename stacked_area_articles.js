@@ -57,15 +57,14 @@ export function redrawCharts(chart_width, chart_height, chart_container){
   const annotations1 = [
       {
           note: {
-              title: "Paris 2024 chief pledges to find solutions to keep Olympic surfing in Tahiti after coral damage",
+              title: "          Coral damage in Tahiti",
               label: "AP News, 2023",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
           x: 0,
           y: chart_height,
-          //dy: 50,
-          dy: -40,
+          dy: -100,
           dx: 0,
           wrap: 140,
           month: "Dec-23",
@@ -74,14 +73,14 @@ export function redrawCharts(chart_width, chart_height, chart_container){
       {
           note: {
               //label: "The Associated Press",
-              title: "Paris mayor to swim in Seine to prove cleanliness",
+              title: "Paris mayor to swim in Seine",
               label: "RTÉ, 2024",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
           x: 0,
           y: chart_height,
-          dy: -180,
+          dy: -280,
           dx: 0,
           wrap: 140,
           month: "Jul-24",
@@ -117,15 +116,14 @@ export function redrawCharts(chart_width, chart_height, chart_container){
   const annotations2 = [
       {
           note: {
-              title: "Aluminium tower construction in Tahiti for Olympic surf event paused after barge damages coral",
+              title: "Tower construction in Tahiti paused",
               label: "CNN, 2023",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
           x: 0,
           y: chart_height,
-          //dy: 40,
-          dy: -40,
+          dy: -100,
           dx: 0,
           wrap: 120,
           month: "Dec-23",
@@ -133,14 +131,13 @@ export function redrawCharts(chart_width, chart_height, chart_container){
       },
       {
           note: {
-              title: "Illness and withdrawals ahead of mixed relay triathlon",
+              title: "Illness and withdrawals ahead of triathlon",
               label: "RTÉ, 2024",
               titleClassName: "custom-title",
               labelClassName: "custom-label"
           },
           x: 0,
           y: chart_height,
-          //dy: 20,
           dy: -180,
           dx: 0,
           wrap: 120,
@@ -151,7 +148,6 @@ export function redrawCharts(chart_width, chart_height, chart_container){
 
   const color_arr2 = ["#549ec4", "#8ce3b0"];// skyblue: #549ec4, lightgreen: #8ce3b0
   const key_arr2 = ["Environmental - Aquatic", "Environmental - Non-Aquatic"];
-  //let pos_x2 = chart_width + 190 * window.innerWidth/1536;
   
   let pos_x2 = chart_width + 190 * chart_width/FULL_CHART_WIDTH;
   let pos_y2 = 0;
